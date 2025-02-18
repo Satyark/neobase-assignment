@@ -53,12 +53,12 @@ const Dropdown = () => {
       >
         <span className='flex justify-center items-center gap-2 text-[12px]'>
           {value? (
-            <Image src={value.logo} alt='/' width={20} height={20} className=''/>
-          ): <Image src={tokens[0].logo} alt='/' width={20} height={20} className=''/>}
+            <Image src={value.logo} alt='/' width={30} height={30} className=''/>
+          ): <Image src={tokens[0].logo} alt='/' width={30} height={30} className=''/>}
         {displayName}
         </span>
         <svg
-          className="-mr-1 ml-2 h-5 w-5"
+          className="-mr-1 ml-2 h-5 w-5 mt-1"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
@@ -86,13 +86,13 @@ const Dropdown = () => {
           {tokens?.map((chain) => (
               <button
                 key={chain.name}
-                className="flex justify-between items-center gap-2 w-full px-4 py-2 text-[12px] text-white hover:bg-gray-700"
+                className="flex justify-between items-center gap-2 w-full px-2 text-[12px] text-white hover:bg-gray-700"
                 role="menuitem"
                 onClick={() => handleClick(chain.name)}
               >
                 <span className='flex gap-2'>
-                <Image src={chain.logo} alt={chain.name} width={20} height={20} />
-                {chain.name}
+                <Image src={chain.logo} alt={chain.name} width={30} height={30} />
+                <p className='mt-2'>{chain.name}</p>
                 </span>
                 {chain.name == displayName ? (
                   <svg

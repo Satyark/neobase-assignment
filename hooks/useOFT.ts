@@ -1,7 +1,6 @@
 import { useAccount, useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
-import { OFT_ABI } from '../abis/oft'; // Import the ABI for the OFT token
-import { useCallback, useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
+import { OFT_ABI } from '../abis/oft';
+import { useEffect, useState } from 'react';
 import { getAddress, parseEther } from 'viem';
 
 const OFT_CONTRACT_ADDRESSES = {
@@ -21,7 +20,7 @@ export const useOFT = ()=>{
         isSuccess: isTransferSuccess,
         isError: isTransferError,
       } = useWaitForTransactionReceipt({
-        hash: transferData, // `transferData` is the transaction hash
+        hash: transferData,
       });
 
       useEffect(() => {
@@ -40,7 +39,7 @@ export const useOFT = ()=>{
         try {
           setIsLoading(true);
           await transfer({
-            address: getAddress(OFT_CONTRACT_ADDRESSES.arbitrum), // Ensure valid address
+            address: getAddress(OFT_CONTRACT_ADDRESSES.arbitrum),
             abi: OFT_ABI,
             functionName: 'transferFrom',
             args: [getAddress(address), getAddress(to), parseEther(amount)],
@@ -59,7 +58,7 @@ export const useOFT = ()=>{
     isSuccess: isBridgeSuccess,
     isError: isBridgeError,
   } = useWaitForTransactionReceipt({
-    hash: bridgeData, // `bridgeData` is the transaction hash
+    hash: bridgeData,
   });
   useEffect(() => {
     if (isBridgeSuccess) {
@@ -86,11 +85,11 @@ export const useOFT = ()=>{
         functionName: 'sendFrom',
         args: [
           getAddress(address),
-          42161, //arbitrum id
+          42161,
           getAddress(to),
           parseEther(amount),
-          '0x0000000000000000000000000000000000000000', // zroPaymentAddress
-          '0x', // AdapterParams
+          '0x0000000000000000000000000000000000000000',
+          '0x',
         ],
       });
     } catch (err: any) {
@@ -105,61 +104,4 @@ export const useOFT = ()=>{
         error,
         txHash: transferData || bridgeData }
 
-    // const transfer = useCallback(
-    //     async (to: string, amount: string) => {
-    //       if (!address) {
-    //         toast.error('Please connect your wallet');
-    //         return;
-    //       }
-    
-    //       try {
-    //         console.log("MyAdd-->", address, amount, to);
-            
-    //         await writeContract({
-    //           address: getAddress(OFT_CONTRACT_ADDRESSES.arbitrum), // Use the Polygon contract for transfers
-    //           abi: OFT_ABI, // Use the imported ABI
-    //           functionName: 'transferFrom',
-    //           args: [address, to, BigInt(amount)], // Convert amount to BigInt
-    //         });
-    //         toast.success('Transfer successful!');
-    //       } catch (error) {
-    //         toast.error('Transfer failed');
-    //         console.error(error);
-    //       }
-    //     },
-    //     [address, writeContract]
-    //   );
-
-    //   const bridge = useCallback(
-    //     async (toChainId: number, to: string, amount: string) => {
-    //       if (!address) {
-    //         toast.error('Please connect your wallet');
-    //         return;
-    //       }
-    
-    //       try {
-    //         await writeContract({
-    //           address: getAddress(OFT_CONTRACT_ADDRESSES.polygon), // Use the source chain contract
-    //           abi: OFT_ABI, // Use the imported ABI
-    //           functionName: 'sendFrom',
-    //           args: [
-    //             address, // From address
-    //             BigInt(toChainId), // Destination chain ID (LayerZero chain ID)
-    //             to, // Destination address
-    //             BigInt(amount), // Amount to bridge
-    //             '0x0000000000000000000000000000000000000000', // zroPaymentAddress
-    //             '0x', // adapterParams (empty for default)
-    //           ],
-    //         });
-    //         toast.success('Bridging initiated!');
-    //       } catch (error) {
-    //         toast.error('Bridging failed');
-    //         console.error(error);
-    //       }
-    //     },
-    //     [address, writeContract]
-    //   );
-
-    //   return { transfer };
-
-}
+};

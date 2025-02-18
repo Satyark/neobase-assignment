@@ -10,16 +10,10 @@ export interface Chain {
 
 export const tokens: Chain[] = [
   {
-      name: 'USDC',
+      name: 'OFT',
       symbol: '/',
-      logo:'/usd-coin-usdc-logo.svg',
+      logo:'/layer0.png',
       token: 'usdc'
-  },
-  {
-      name: 'USDT',
-      symbol: '/',
-      logo:'/usdt.svg',
-      token: 'usdt'
   }
 ]
 

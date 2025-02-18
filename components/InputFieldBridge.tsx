@@ -14,7 +14,7 @@ const InputFieldBridge: React.FC<InputProps> = ({ label1,label2, type, placehold
     
     return (
     <div className="max-w-md mt-2 rounded-lg p-px bg-gradient-to-r from-[#ff00e1] to-[#4200ff]">
-    <div className="bg-[#171717] p-5 rounded-lg shadow-lg max-w-sm">
+    <div className="bg-[#171717] p-2 md:p-4 rounded-lg shadow-lg max-w-sm">
       <span className='flex justify-start items-center gap-3'>
         <label className="block text-[#374151] text-sm">{label1}</label>
         { label2 && <span className='bg-black px-3 py-1 rounded-full'>
